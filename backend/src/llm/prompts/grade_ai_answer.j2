@@ -1,0 +1,6 @@
+{# version: 1 #}
+TASK:grade_ai_answer
+{{ injection }}
+firm_name="{{ firm_name }}"
+Does the answer name this firm? Does it recommend it? {{ answer_block }}
+Return JSON: {"mentioned": true|false, "recommended": true|false}.

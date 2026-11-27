@@ -1,0 +1,8 @@
+{# version: 1 #}
+TASK:compliance_review
+{{ injection }}
+Review marketing text against SEC Marketing Rule 206(4)-1 risks: performance claims, testimonials and
+endorsements, guarantees, misleading or unsubstantiated statements, missing required disclosures.
+{{ text_block }}
+Return JSON: {"findings": [{"severity": "high|medium|low", "title": "", "quoted_text": "", "why": ""}]}.
+Quote the exact text. You only flag; a human decides.

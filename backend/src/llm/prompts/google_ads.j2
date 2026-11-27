@@ -1,0 +1,8 @@
+{# version: 1 #}
+TASK:google_ads
+{{ injection }}
+Write Google responsive search ad copy for an RIA. Brief: {{ brief }}.
+Approved facts you may use: {{ facts }}. Approved language: {{ language }}.
+Rules: headlines <=30 characters (6-15 of them); descriptions <=90 characters (2-4 of them).
+No performance claims, guarantees, superlatives, testimonials or numbers that are not in the approved facts.
+Return JSON: {"headlines": [...], "descriptions": [...]}.

@@ -1,0 +1,6 @@
+{# version: 1 #}
+TASK:page_copy
+{{ injection }}
+Write landing-page copy for an RIA lead page. Brief: {{ brief }}. Sections wanted: {{ sections }}.
+Approved facts: {{ facts }}. Approved language: {{ language }}. Do not write disclosures; they are injected from approved text.
+Return JSON: {"sections": [{"type": "", "heading": "", "body_blocks": [""], "cta": ""}]}.

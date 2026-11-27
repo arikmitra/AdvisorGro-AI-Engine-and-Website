@@ -1,0 +1,7 @@
+{# version: 1 #}
+TASK:emails
+{{ injection }}
+Write a 5-email follow-up sequence and one SMS for new leads of an RIA. Brief: {{ brief }}.
+Approved facts: {{ facts }}. Use the placeholders {first_name} and {link}; never invent personal data.
+SMS must be <=160 characters and include "Reply STOP to opt out".
+Return JSON: {"emails": [{"subject": "", "body": ""}], "sms": [""]}.

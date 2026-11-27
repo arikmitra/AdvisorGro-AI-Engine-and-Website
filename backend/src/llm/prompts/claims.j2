@@ -1,0 +1,6 @@
+{# version: 1 #}
+TASK:claims
+{{ injection }}
+List every factual claim in the text: numbers, years, awards, rankings, credentials, returns, testimonials,
+superlatives, guarantees, and statements about the firm. {{ text_block }}
+Return JSON: {"claims": [{"text": "", "kind": "number|award|return|testimonial|superlative|credential|fact"}]}.
