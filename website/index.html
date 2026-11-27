@@ -1,0 +1,442 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Shield by AdvisorGro: Visibility Monitoring for Independent RIAs</title>
+<meta name="description" content="Shield runs the AdvisorGro Engine on your firm repeatedly: five groups of checks, one score out of 100, and evidence for every finding. Start with a free Audit.">
+<link rel="canonical" href="https://advisorgro.com/">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://advisorgro.com/">
+<meta property="og:title" content="Shield by AdvisorGro: Visibility Monitoring for RIAs">
+<meta property="og:description" content="Your firm's online visibility, scored and watched. Five groups of checks, 100-point diagnostic scale, continuous surveillance.">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "AdvisorGro Shield",
+  "applicationCategory": "BusinessApplication",
+  "operatingSystem": "Web-based",
+  "offers": [
+    {
+      "@type": "Offer",
+      "name": "Audit",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    {
+      "@type": "Offer",
+      "name": "Shield Continuous Telemetry",
+      "price": "249",
+      "priceCurrency": "USD",
+      "billingDuration": "P3M"
+    }
+  ],
+  "provider": {
+    "@type": "Organization",
+    "name": "AdvisorGro Technologies",
+    "url": "https://advisorgro.com/"
+  }
+}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/site.css">
+</head>
+<body>
+
+<header>
+  <div class="container nav-wrap">
+    <a href="/" class="brand" aria-label="AdvisorGro Home">
+      <svg width="24" height="28" viewBox="0 0 32 36" fill="none" aria-hidden="true">
+        <path d="M16 1L29 6V20L16 35L3 20V6L16 1Z" fill="#3a77ff"/>
+        <path d="M16 11L21 16L16 21L11 16L16 11Z" fill="#fff"/>
+      </svg>
+      Advisor<span>Gro</span>
+      <span class="brand-badge">Shield</span>
+    </a>
+    <nav aria-label="Primary Navigation">
+      <a href="#overview">Overview</a>
+      <a href="#engine">The Engine</a>
+      <a href="#lifecycle">How it Works</a>
+      <a href="#audiences">Who it is For</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#audit" class="btn btn-primary btn-nav">Run Free Audit</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <!-- Hero -->
+  <section class="hero" id="overview" style="border:none;">
+    <div class="container hero-grid">
+      <div>
+        <div class="pill-tag"><span class="pill-dot"></span> Visibility Monitoring for Independent RIAs</div>
+        <h1>Your firm's online visibility, scored and watched.</h1>
+        <p class="hero-desc">Shield runs the AdvisorGro Engine on your firm repeatedly: five groups of checks, one score out of 100, and the empirical evidence behind every finding.</p>
+        
+        <form class="run-bar" id="hero-form" action="#audit">
+          <input name="u" type="text" placeholder="yourfirm.com" aria-label="Firm Website URL" required>
+          <button class="btn btn-primary" type="submit">Run the free Audit →</button>
+        </form>
+        <p class="micro-note">⚡ Free, one run, under two minutes. No call, no credit card required.</p>
+
+        <div class="stats-row">
+          <div><div class="stat-val">5</div><div class="stat-lbl">Discrete Check Rails</div></div>
+          <div><div class="stat-val">100</div><div class="stat-lbl">Point Objective Scale</div></div>
+          <div><div class="stat-val">&lt;120s</div><div class="stat-lbl">Full Diagnostic Pass</div></div>
+        </div>
+      </div>
+
+      <!-- Live Telemetry Card -->
+      <div class="inst-card ready" id="inst">
+        <div class="inst-header">
+          <span>● Live Telemetry Panel</span>
+          <span id="run-time">Sample run · Just now</span>
+        </div>
+        <div class="firm-name">Merrow Lane Wealth Partners</div>
+        <div class="score-box">
+          <span class="score-num" id="tot">53</span>
+          <span class="score-scale">/ 100</span>
+          <span class="score-delta" id="dl">↓ 4 since last run</span>
+        </div>
+
+        <div class="meter-bar" aria-hidden="true">
+          <div class="seg" style="flex:20;--f:85%"><u></u></div>
+          <div class="seg" style="flex:20;--f:45%"><u></u></div>
+          <div class="seg" id="g3" style="flex:25;--f:16%"><u></u></div>
+          <div class="seg" style="flex:20;--f:65%"><u></u></div>
+          <div class="seg" style="flex:15;--f:66%"><u></u></div>
+        </div>
+
+        <ul class="check-list">
+          <li class="check-item">
+            <span class="name">Technical foundation</span>
+            <span class="pts">17 / 20</span>
+            <span class="sub">TLS certificate valid. Structured data missing.</span>
+          </li>
+          <li class="check-item">
+            <span class="name">Search visibility</span>
+            <span class="pts">9 / 20</span>
+            <span class="sub">Phone number differs on two directories.</span>
+          </li>
+          <li class="check-item">
+            <span class="name">AI visibility</span>
+            <span class="pts" id="p3">4 / 25</span>
+            <span class="sub" id="d3">Named in 1 of 30 AI answers.</span>
+          </li>
+          <li class="check-item">
+            <span class="name">Citation surfaces</span>
+            <span class="pts">13 / 20</span>
+            <span class="sub">SEC record matches the website.</span>
+          </li>
+          <li class="check-item">
+            <span class="name">Compliance exposure</span>
+            <span class="pts">10 / 15</span>
+            <span class="sub">1 flag held for CCO review before release.</span>
+          </li>
+        </ul>
+
+        <div class="inst-footer">
+          <span id="note">Each bar represents group weight. Complete run.</span>
+          <button type="button" class="inst-btn" id="sim">Simulate a check timeout</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Engine Breakdown -->
+  <section id="engine">
+    <div class="container">
+      <div class="sec-tag">Telemetry Architecture</div>
+      <h2>Five checks. 100 points.</h2>
+      <p class="sec-intro">Each run is one pass of the Engine. Groups run in parallel on separate workers, so one failure never stalls another.</p>
+
+      <div class="engine-rows">
+        <div class="engine-row">
+          <div class="engine-pts">20 <small>PTS</small></div>
+          <div><div class="engine-title">Technical foundation</div><div class="engine-sub">Protocol, render, structured data</div></div>
+          <div class="engine-detail"><p>Domain, TLS, render, canonical and viewport tags, valid JSON-LD. Deterministic, no AI.</p></div>
+        </div>
+        <div class="engine-row">
+          <div class="engine-pts">20 <small>PTS</small></div>
+          <div><div class="engine-title">Search visibility</div><div class="engine-sub">Index hygiene &amp; directories</div></div>
+          <div class="engine-detail"><p>Headings, crawl depth, Google Business Profile, and NAP consistency across directories.</p></div>
+        </div>
+        <div class="engine-row">
+          <div class="engine-pts">25 <small>PTS</small></div>
+          <div><div class="engine-title">AI visibility</div><div class="engine-sub">Answer-engine citation share</div></div>
+          <div class="engine-detail"><p>Buyer questions asked of ChatGPT, Perplexity and Gemini for your market, repeated to separate signal from variance.</p></div>
+        </div>
+        <div class="engine-row">
+          <div class="engine-pts">20 <small>PTS</small></div>
+          <div><div class="engine-title">Citation surfaces</div><div class="engine-sub">Registry parity</div></div>
+          <div class="engine-detail"><p>Website checked against SEC IAPD, CRD, state regulators and fiduciary associations.</p></div>
+        </div>
+        <div class="engine-row">
+          <div class="engine-pts">15 <small>PTS</small></div>
+          <div><div class="engine-title">Compliance exposure</div><div class="engine-sub">Marketing Rule 206(4)-1</div></div>
+          <div class="engine-detail"><p>Performance claims, superlatives, testimonials, Form ADV 2A and CRS links. Flags only; CCO decides.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Evidence Section -->
+  <section id="evidence">
+    <div class="container evidence-grid">
+      <div>
+        <div class="sec-tag">Empirical Verifiability</div>
+        <h2>Every score traces back to something you can check.</h2>
+        <p class="sec-intro" style="margin-bottom: 32px;">Black-box scores erode advisory trust. AdvisorGro rejects opaque indexing: every point deduction ships with exact URLs, timestamped request hashes, and the reproducible payload.</p>
+        
+        <h3 style="font-size: 20px; margin-bottom: 8px;">Two reports per run</h3>
+        <p style="color: var(--mute); font-size: 15px; margin-bottom: 24px;">A <strong>Client Report</strong> rendered in clear English with fixes ranked by impact against developmental effort. An <strong>Evidence Report</strong> with raw network payloads for whoever manages your DNS and codebase.</p>
+
+        <h3 style="font-size: 20px; margin-bottom: 8px;">Nothing fails quietly</h3>
+        <p style="color: var(--mute); font-size: 15px;">If a diagnostic rail encounters an unreachable third-party API or rate ceiling, the run still returns immediately. That sector is marked <em>unverified</em>, the score is calculated as a floor minimum, and Shield never emits a false-positive alert.</p>
+      </div>
+
+      <div class="evidence-card">
+        <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid var(--border); padding-bottom:12px;">
+          <span style="font-size: 12px; font-weight:700; color:var(--mute); text-transform:uppercase;">Audit Evidence Repository</span>
+          <span style="font-family: monospace; font-size: 12px; color: var(--accent);">Trace #8041-B</span>
+        </div>
+        <table class="evidence-table">
+          <tr>
+            <td>🔒 TLS Certificate</td>
+            <td><span class="badge badge-ok">Valid, 214 Days Left</span></td>
+          </tr>
+          <tr>
+            <td>🧩 Structured Data (JSON-LD)</td>
+            <td><span class="badge badge-err">Not Found</span></td>
+          </tr>
+          <tr>
+            <td>🤖 Named in AI answers</td>
+            <td><span class="badge badge-warn">1 of 30 Queries</span></td>
+          </tr>
+          <tr>
+            <td>🏛 SEC record vs website</td>
+            <td><span class="badge badge-ok">Name &amp; Address Match</span></td>
+          </tr>
+          <tr>
+            <td>⚠️ Performance claim, no nearby risk text</td>
+            <td><span class="badge badge-warn">Held for CCO</span></td>
+          </tr>
+        </table>
+        <div style="margin-top: 18px; font-size: 12px; color: var(--mute); display:flex; justify-content:space-between;">
+          <span>All 5 checks verified with raw response buffers</span>
+          <a href="#" style="color: var(--accent); text-decoration:underline;">Download raw schema .json</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Lifecycle -->
+  <section id="lifecycle">
+    <div class="container">
+      <div class="sec-tag">Lifecycle Oversight</div>
+      <h2>What Shield does after the first run.</h2>
+      <p class="sec-intro">A one-off audit is obsolete by next quarter's deploy. Shield establishes a perpetual surveillance loop over your public fiduciary footprint.</p>
+
+      <div class="seq-grid">
+        <div class="seq-card">
+          <div class="seq-num">01</div>
+          <div class="seq-title">Runs again on a schedule</div>
+          <div class="seq-desc">The same five groups, the same underlying checks, executed on continuous cadence so every metric is mathematically comparable over time.</div>
+        </div>
+        <div class="seq-card">
+          <div class="seq-num">02</div>
+          <div class="seq-title">Compares with last time</div>
+          <div class="seq-desc">Each group is evaluated against prior run data points to isolate sudden deltas, domain drift, and registry mismatches before prospects notice.</div>
+        </div>
+        <div class="seq-card">
+          <div class="seq-num">03</div>
+          <div class="seq-title">Alerts you to real change</div>
+          <div class="seq-desc">Only statistically valid, completed runs trigger outbound alerts. Ephemeral network blips and API gaps never disrupt your inbox.</div>
+        </div>
+        <div class="seq-card">
+          <div class="seq-num">04</div>
+          <div class="seq-title">Updates your fix list</div>
+          <div class="seq-desc">Resolved vulnerabilities drop off immediately. Newly discovered issues arrive alongside pre-drafted code snippets ready to deploy.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Audience -->
+  <section id="audiences">
+    <div class="container">
+      <div class="sec-tag">Audience Focus</div>
+      <h2>Built for firms where visibility is the pipeline.</h2>
+      <p class="sec-intro">When high-net-worth referrals research your firm online, algorithmic silence or inaccurate directory disclosures directly cost AUM.</p>
+
+      <div class="audience-grid">
+        <div class="audience-card">
+          <div class="audience-icon">🏛</div>
+          <div class="audience-title">Independent RIA owners</div>
+          <p class="audience-desc">You are the marketing department. Shield tells you what slipped, in one score, without paying for ambiguous agency retainers or waiting for bloated slide decks.</p>
+        </div>
+        <div class="audience-card">
+          <div class="audience-icon">🛡</div>
+          <div class="audience-title">Firms with a CCO</div>
+          <p class="audience-desc">Compliance flags reach your CCO with timestamped evidence attached, safeguarding your practice under SEC Rule 206(4)-1 before assets or revisions go live.</p>
+        </div>
+        <div class="audience-card">
+          <div class="audience-icon">🚀</div>
+          <div class="audience-title">Advisors going independent</div>
+          <p class="audience-desc">Launch your new independent advisory presence and confirm within 48 hours whether algorithmic search engines, LLM answers, and state/SEC registers align cleanly.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pricing -->
+  <section id="pricing">
+    <div class="container">
+      <div class="sec-tag">Clear Investment</div>
+      <h2>Start free. Pay when you want it watched.</h2>
+      <p class="sec-intro">Predictable pricing with zero hidden implementation fees or lengthy multi-year contracts.</p>
+
+      <div class="pricing-grid">
+        <div class="price-card">
+          <div class="price-title">Audit</div>
+          <div class="price-tagline">One Engine Run</div>
+          <div class="price-amt">$0 <small>one time</small></div>
+          <ul class="price-features">
+            <li>All five Engine groups and score out of 100</li>
+            <li>Executive client report &amp; technical evidence report</li>
+            <li>Prioritized fix list ranked by impact vs effort</li>
+          </ul>
+          <a href="#audit" class="btn" style="background:var(--surface-high); color:#fff;">Run Free Audit</a>
+        </div>
+
+        <div class="price-card featured">
+          <span class="badge-flagship">Flagship</span>
+          <div class="price-title">Shield</div>
+          <div class="price-tagline">Continuous Telemetry</div>
+          <div class="price-amt">$249 <small>per quarter</small></div>
+          <ul class="price-features">
+            <li>Scheduled re-runs across all five check categories</li>
+            <li>Immediate alerts when your score or a finding shifts</li>
+            <li>AI visibility tracked as longitudinal trend curve</li>
+            <li>Pre-drafted code and markup patches for every failure</li>
+            <li>Quarterly human-reviewed audit &amp; Glynac compliance trail</li>
+          </ul>
+          <a href="#audit" class="btn btn-primary">Activate Shield</a>
+        </div>
+
+        <div class="price-card">
+          <div class="price-title">Gro</div>
+          <div class="price-tagline">Growth Add-on · Requires Shield</div>
+          <div class="price-amt">20% <small>of ad media / $1k SEO</small></div>
+          <ul class="price-features">
+            <li>Bespoke customer acquisition and organic search expansion handled end-to-end under strict RIA regulatory guardrails</li>
+            <li>Gro Ads: Google &amp; Meta campaigns (20% spend, $1,500/mo min)</li>
+            <li>Gro SEO: $1,000/mo flat comprehensive search rank architecture</li>
+            <li>Every marketing asset reviewed through Glynac before public launch</li>
+          </ul>
+          <a href="#audit" class="btn" style="background:var(--surface-high); color:#fff;">Inquire about Gro</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Intake Form -->
+  <section id="audit">
+    <div class="container">
+      <div style="text-align: center; max-width: 650px; margin: 0 auto;">
+        <div class="pill-tag"><span class="pill-dot"></span> No Commitment · Diagnostic Run</div>
+        <h2>Run the Engine on your firm. Free.</h2>
+        <p class="sec-intro" style="margin: 14px auto 0;">Tell us where to look. We email both reports when the run finishes, usually within two minutes.</p>
+      </div>
+
+      <div class="form-wrap">
+        <form class="form-grid" id="audit-form" data-advisorgro="audit" novalidate>
+          <div class="form-full">
+            <label for="form-site">Firm Website URL *</label>
+            <input type="text" id="form-site" name="website" placeholder="yourfirm.com" required>
+          </div>
+          <div>
+            <label for="form-firm">Firm Name (Optional)</label>
+            <input type="text" id="form-firm" name="firm" data-field="firm_name" placeholder="Merrow Lane Wealth Partners">
+          </div>
+          <div>
+            <label for="form-area">City or Region Served *</label>
+            <input type="text" id="form-area" name="area" placeholder="Austin, Texas" required>
+          </div>
+          <div class="form-full">
+            <label for="form-email">Work Email *</label>
+            <input type="email" id="form-email" name="email" placeholder="you@yourfirm.com" required>
+          </div>
+          <div class="form-full">
+            <label class="consent"><input type="checkbox" name="consent" id="form-consent" data-consent-text="I agree that AdvisorGro may email me my audit reports and contact me about them. Consent is not a condition of anything else." data-consent-version="1" required>
+            <span>I agree that AdvisorGro may email me my audit reports and contact me about them. See the <a href="#privacy">privacy notice</a>.</span></label>
+          </div>
+          <div class="form-full" style="margin-top: 12px;">
+            <button class="btn btn-primary" type="submit" style="width: 100%; height: 52px; font-size: 16px;">Run the free Audit ⚡</button>
+            <p class="micro-note" style="text-align: center; margin-top: 12px;">The Audit reads public pages only. It does not provide legal or compliance advice.</p>
+          </div>
+        </form>
+        <div data-advisorgro="audit-results" aria-live="polite"></div>
+        
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="brand" style="margin-bottom: 14px;">
+          <svg width="20" height="24" viewBox="0 0 32 36" fill="none" aria-hidden="true">
+            <path d="M16 1L29 6V20L16 35L3 20V6L16 1Z" fill="#3a77ff"/>
+            <path d="M16 11L21 16L16 21L11 16L16 11Z" fill="#fff"/>
+          </svg>
+          AdvisorGro <span>Shield</span>
+        </div>
+        <p style="font-size: 13.5px; line-height: 1.6; max-width: 320px;">Continuous visibility telemetry, digital audit intelligence, and empirical reputation monitoring engineered specifically for Registered Investment Advisors and wealth advisory practices.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Platform</h4>
+        <ul>
+          <li><a href="#engine">Telemetry Engine</a></li>
+          <li><a href="#engine">Inspection Rails</a></li>
+          <li><a href="#pricing">Practice Tiers</a></li>
+          <li><a href="#audit">Diagnostic Run</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Governance</h4>
+        <ul>
+          <li><a href="#audiences">RIA Fiduciary Scope</a></li>
+          <li><a href="#evidence">SEC Rule 206(4)-1</a></li>
+          <li><a href="#evidence">Data Protection</a></li>
+          <li><a href="#overview">Telemetry Security</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Institutional Audit</h4>
+        <p style="font-size: 13px; line-height: 1.5; margin-bottom: 10px;">Request an on-demand baseline crawl of your digital presence across algorithmic search engines and local registry networks.</p>
+        <a href="#audit" style="color: var(--accent); font-weight:600; font-size:13px; text-decoration:underline;">Initialize Diagnostic crawl</a>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div>© 2026 AdvisorGro Technologies, Inc. All rights reserved. Shield Visibility Architecture.</div>
+      <div style="display:flex; gap: 20px;">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Service</a>
+        <a href="#">Fiduciary Attestation</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="site.config.js"></script>
+<script src="assets/advisorgro-api.js" defer></script>
+<script src="assets/site.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,60 @@
+# Local stack. Real infrastructure runs on managed services (see infra/tofu); this mirrors its shape.
+services:
+  postgres:
+    image: pgvector/pgvector:pg16
+    environment: {POSTGRES_USER: advisorgro, POSTGRES_PASSWORD: dev-only, POSTGRES_DB: advisorgro}
+    ports: ["5432:5432"]
+    healthcheck: {test: ["CMD-SHELL", "pg_isready -U advisorgro"], interval: 5s, retries: 10}
+  valkey:
+    image: valkey/valkey:8
+    ports: ["6379:6379"]
+  temporal:
+    image: temporalio/auto-setup:1.25
+    environment: {DB: postgres12, DB_PORT: 5432, POSTGRES_USER: advisorgro, POSTGRES_PWD: dev-only, POSTGRES_SEEDS: postgres}
+    depends_on: {postgres: {condition: service_healthy}}
+    ports: ["7233:7233"]
+  keycloak:
+    image: quay.io/keycloak/keycloak:26.0
+    command: start-dev --import-realm
+    environment: {KEYCLOAK_ADMIN: admin, KEYCLOAK_ADMIN_PASSWORD: dev-only}
+    volumes: ["./infra/keycloak:/opt/keycloak/data/import:ro"]
+    ports: ["8080:8080"]
+  mailpit:
+    image: axllent/mailpit
+    ports: ["8025:8025", "1025:1025"]
+  otel:
+    image: otel/opentelemetry-collector-contrib:0.110.0
+    command: ["--config=/etc/otel.yaml"]
+    volumes: ["./infra/otel/collector.yaml:/etc/otel.yaml:ro"]
+    ports: ["4317:4317"]
+  migrate:
+    build: {context: ., dockerfile: infra/docker/api.Dockerfile}
+    command: ["python", "-m", "alembic", "upgrade", "head"]
+    environment: &env
+      AG_ENV: dev
+      AG_DATABASE_URL: postgresql+psycopg://advisorgro:dev-only@postgres:5432/advisorgro
+      AG_USE_FAKES: "true"
+      AG_INLINE_WORKER: "false"
+      AG_OBJECT_STORE_DIR: /data/objects
+      AG_JWT_ISSUER: http://localhost:8080/realms/advisorgro
+      AG_TEMPORAL_ADDRESS: temporal:7233
+    depends_on: {postgres: {condition: service_healthy}}
+  api:
+    build: {context: ., dockerfile: infra/docker/api.Dockerfile}
+    environment: *env
+    ports: ["8000:8000"]
+    volumes: ["objects:/data/objects"]
+    depends_on: {migrate: {condition: service_completed_successfully}}
+  worker:
+    build: {context: ., dockerfile: infra/docker/worker.Dockerfile}
+    environment: *env
+    volumes: ["objects:/data/objects"]
+    depends_on: {migrate: {condition: service_completed_successfully}}
+  website:
+    image: nginx:1.27-alpine
+    volumes: ["./website:/usr/share/nginx/html:ro"]
+    ports: ["8081:80"]
+  portal:
+    build: {context: ., dockerfile: infra/docker/portal.Dockerfile}
+    ports: ["5173:80"]
+volumes: {objects: {}}

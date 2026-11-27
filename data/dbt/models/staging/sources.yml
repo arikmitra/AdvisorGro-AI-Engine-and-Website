@@ -1,0 +1,6 @@
+version: 2
+sources:
+  - name: app
+    schema: public
+    description: "Product tables. Only non-PII columns are selected downstream: contact fields are encrypted and are never read."
+    tables: [{name: runs}, {name: group_results}, {name: campaigns}, {name: leads}, {name: lead_events}, {name: metrics_daily}, {name: approvals}, {name: usage_events}]

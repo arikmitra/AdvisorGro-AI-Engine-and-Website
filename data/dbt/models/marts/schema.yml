@@ -1,0 +1,8 @@
+version: 2
+models:
+  - name: fct_audit_runs
+    config: {contract: {enforced: false}}
+    columns: [{name: trigger, tests: [not_null, {accepted_values: {values: [free_audit, shield, portfolio, probe]}}]}, {name: runs, tests: [not_null]}]
+  - name: fct_lead_sla
+    config: {contract: {enforced: false}}
+    columns: [{name: leads, tests: [not_null]}]

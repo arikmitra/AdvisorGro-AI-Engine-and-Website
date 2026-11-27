@@ -1,0 +1,22 @@
+{
+  "realm": "advisorgro", "enabled": true, "sslRequired": "external", "registrationAllowed": false, "bruteForceProtected": true,
+  "ssoSessionIdleTimeout": 1800, "ssoSessionMaxLifespan": 36000, "accessTokenLifespan": 300,
+  "passwordPolicy": "length(12) and notUsername and passwordHistory(5)",
+  "requiredActions": [{"alias": "CONFIGURE_TOTP", "name": "Configure OTP", "enabled": true, "defaultAction": true}],
+  "roles": {"realm": [
+    {"name": "firm_admin"}, {"name": "cco"}, {"name": "marketing"}, {"name": "advisor"}, {"name": "read_only"},
+    {"name": "support"}, {"name": "reviewer"}, {"name": "engineer"}, {"name": "platform_admin"}, {"name": "security"}]},
+  "clients": [
+    {"clientId": "advisorgro-portal", "publicClient": true, "standardFlowEnabled": true, "directAccessGrantsEnabled": false,
+     "redirectUris": ["http://localhost:5173/*"], "webOrigins": ["http://localhost:5173"],
+     "attributes": {"pkce.code.challenge.method": "S256", "post.logout.redirect.uris": "http://localhost:5173/*"},
+     "protocolMappers": [
+       {"name": "tenant_id", "protocol": "openid-connect", "protocolMapper": "oidc-usermodel-attribute-mapper", "config": {"user.attribute": "tenant_id", "claim.name": "tenant_id", "access.token.claim": "true", "jsonType.label": "String"}},
+       {"name": "firm_id", "protocol": "openid-connect", "protocolMapper": "oidc-usermodel-attribute-mapper", "config": {"user.attribute": "firm_id", "claim.name": "firm_id", "access.token.claim": "true", "jsonType.label": "String"}},
+       {"name": "roles", "protocol": "openid-connect", "protocolMapper": "oidc-usermodel-realm-role-mapper", "config": {"claim.name": "roles", "access.token.claim": "true", "multivalued": "true", "jsonType.label": "String"}},
+       {"name": "audience", "protocol": "openid-connect", "protocolMapper": "oidc-audience-mapper", "config": {"included.custom.audience": "advisorgro-api", "access.token.claim": "true"}},
+       {"name": "staff", "protocol": "openid-connect", "protocolMapper": "oidc-usermodel-attribute-mapper", "config": {"user.attribute": "staff", "claim.name": "staff", "access.token.claim": "true", "jsonType.label": "boolean"}}]},
+    {"clientId": "advisorgro-api", "bearerOnly": true}
+  ],
+  "_notes": "Step-up: the portal re-runs authorization with max_age=300 and acr_values for MFA when the API answers step_up_required. Tenant and staff claims are set by AdvisorGro admins only, never by users."
+}

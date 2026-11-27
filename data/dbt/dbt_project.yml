@@ -1,0 +1,8 @@
+name: advisorgro
+version: "1.0.0"
+profile: advisorgro
+model-paths: ["models"]
+models:
+  advisorgro:
+    staging: {+materialized: view}
+    marts: {+materialized: table, +contract: {enforced: true}}

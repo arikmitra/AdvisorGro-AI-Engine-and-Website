@@ -1,0 +1,29 @@
+# Alerts page a person only when there is a runbook to follow (docs/runbooks/).
+groups:
+  - name: advisorgro
+    rules:
+      - alert: AuditRunsStuck
+        expr: ag_runs_stuck > 0
+        for: 5m
+        labels: {severity: page}
+        annotations: {summary: "Audit runs not finishing", runbook: "docs/runbooks/stuck-runs.md"}
+      - alert: OutboxBacklog
+        expr: ag_outbox_oldest_pending_seconds > 300
+        for: 5m
+        labels: {severity: page}
+        annotations: {summary: "Events are not being delivered", runbook: "docs/runbooks/outbox-backlog.md"}
+      - alert: DeadLetters
+        expr: ag_outbox_dead_letters > 0
+        for: 1m
+        labels: {severity: ticket}
+        annotations: {summary: "Dead-lettered events: replay by run id", runbook: "docs/runbooks/dead-letters.md"}
+      - alert: ReadBackMismatch
+        expr: ag_incidents_open > 0
+        for: 1m
+        labels: {severity: page}
+        annotations: {summary: "A live ad differs from what the CCO approved (campaign auto-paused)", runbook: "docs/runbooks/readback-mismatch.md"}
+      - alert: FollowUpSlaBreach
+        expr: ag_lead_first_contacts_24h > 0 and (ag_lead_first_contacts_within_sla_24h / ag_lead_first_contacts_24h) < 0.95
+        for: 15m
+        labels: {severity: ticket}
+        annotations: {summary: "First reply to leads is missing the 90-second SLA", runbook: "docs/runbooks/followup-sla.md"}

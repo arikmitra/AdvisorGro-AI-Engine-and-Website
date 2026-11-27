@@ -1,0 +1,64 @@
+{
+  "scanner": [
+    {
+      "text": "Our clients earned 12% annual returns last year.",
+      "expect_material": [
+        "performance_claims"
+      ]
+    },
+    {
+      "text": "We help families plan for retirement with a fee-only fiduciary approach.",
+      "expect_material": []
+    },
+    {
+      "text": "We delivered 9.5% returns in 2023.",
+      "expect_material": [
+        "performance_claims"
+      ]
+    }
+  ],
+  "factguard": [
+    {
+      "text": "Serving families since 1998.",
+      "facts": [
+        "Founded in 1998 in Austin."
+      ],
+      "expect_blocked": false
+    },
+    {
+      "text": "Serving families since 1998.",
+      "facts": [
+        "Founded in 2004 in Austin."
+      ],
+      "expect_blocked": true
+    },
+    {
+      "text": "Over 20 years of experience.",
+      "facts": [
+        "The firm has 20 clients served."
+      ],
+      "expect_blocked": true
+    },
+    {
+      "text": "Over 20 years of experience.",
+      "facts": [
+        "Our advisors have 20 years of experience."
+      ],
+      "expect_blocked": false
+    },
+    {
+      "text": "Award-winning advisors.",
+      "facts": [
+        "Fee-only fiduciary."
+      ],
+      "expect_blocked": true
+    },
+    {
+      "text": "A fee-only fiduciary in Austin.",
+      "facts": [
+        "Fee-only fiduciary."
+      ],
+      "expect_blocked": false
+    }
+  ]
+}

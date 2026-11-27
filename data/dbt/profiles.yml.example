@@ -1,0 +1,5 @@
+# Read-only replica or warehouse copy. NEVER point dbt at the primary with a writable role.
+advisorgro:
+  target: dev
+  outputs:
+    dev: {type: postgres, host: localhost, user: dbt_reader, password: "{{ env_var('DBT_PASSWORD') }}", port: 5432, dbname: advisorgro, schema: analytics, threads: 4}
