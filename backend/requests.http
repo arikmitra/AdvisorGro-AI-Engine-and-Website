@@ -1,0 +1,66 @@
+### REST Client extension (humao.rest-client). Click "Send Request" above any request.
+### Tokens: in a terminal in /backend run `python ../scripts/mint_token.py cco` and paste each below (re-mint cco right before approving: step-up allows 5 minutes).
+@base = http://localhost:8000
+@cco = PASTE_CCO_TOKEN
+@marketing = PASTE_MARKETING_TOKEN
+@admin = PASTE_FIRM_ADMIN_TOKEN
+@reviewer = PASTE_REVIEWER_TOKEN
+@campaign = PASTE_CAMPAIGN_ID
+@firm = PASTE_FIRM_ID_FROM_SEED_OUTPUT
+
+### Health
+GET {{base}}/readyz
+
+### Free audit (website contract). Try domains containing: held, nog5, slow, boom, lowtls
+POST {{base}}/api/audit
+Content-Type: application/json
+Idempotency-Key: {{$guid}}
+
+{ "website": "yourfirm.com", "email": "you@yourfirm.com", "area": "Austin, Texas", "consent": true }
+
+### Poll an audit (paste the id from above)
+GET {{base}}/api/audit/PASTE_AUDIT_ID
+
+### Who am I
+GET {{base}}/v1/me
+Authorization: Bearer {{cco}}
+
+### Create a campaign (marketing)
+POST {{base}}/v1/campaigns
+Authorization: Bearer {{marketing}}
+Content-Type: application/json
+
+{ "firm_id": "{{firm}}", "offer_id": "retirement_readiness", "platform": "google", "monthly_budget_cents": 300000, "budget_ceiling_cents": 500000 }
+
+### Generate + fact-guard + pre-check + render, hand to the CCO
+POST {{base}}/v1/campaigns/{{campaign}}/submit
+Authorization: Bearer {{marketing}}
+Content-Type: application/json
+
+{}
+
+### Read the campaign (shows content_hash, pre-check flags, the exact page)
+GET {{base}}/v1/campaigns/{{campaign}}
+Authorization: Bearer {{cco}}
+
+### CCO approves (needs a FRESH cco token; content_hash from the call above)
+POST {{base}}/v1/campaigns/{{campaign}}/decision
+Authorization: Bearer {{cco}}
+Content-Type: application/json
+
+{ "version": 1, "content_hash": "PASTE_CONTENT_HASH", "decision": "approve", "comment": "Reviewed" }
+
+### Pause (firm admin pauses; marketing only requests)
+POST {{base}}/v1/campaigns/{{campaign}}/pause
+Authorization: Bearer {{admin}}
+Content-Type: application/json
+
+{ "reason": "manual test" }
+
+### Review queue (reviewer sees held audit reports)
+GET {{base}}/v1/review-queue
+Authorization: Bearer {{reviewer}}
+
+### Activity log (CCO / admin / read-only)
+GET {{base}}/v1/activity
+Authorization: Bearer {{cco}}
