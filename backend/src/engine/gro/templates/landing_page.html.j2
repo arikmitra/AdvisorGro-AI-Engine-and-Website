@@ -1,0 +1,26 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>{{ firm.name }} | {{ offer.name }}</title><meta name="robots" content="noindex">
+<style>:root{--bg:#fff;--t:#111;--m:#555;--a:#0a5cff;--b:#ddd}@media (prefers-color-scheme:dark){:root{--bg:#0d0d0d;--t:#f2f2f2;--m:#9a9a9a;--b:#2a2a2a}}
+body{margin:0;background:var(--bg);color:var(--t);font:17px/1.6 system-ui,sans-serif}main{max-width:720px;margin:0 auto;padding:32px 20px}
+h1{font-size:34px;line-height:1.15}h2{margin-top:36px}.btn{background:var(--a);color:#fff;border:0;border-radius:8px;padding:12px 22px;font:inherit;font-weight:700}
+input{width:100%;padding:10px;margin:6px 0 12px;border:1px solid var(--b);border-radius:6px;font:inherit;background:transparent;color:inherit}.hp{position:absolute;left:-9999px}
+footer{margin-top:48px;border-top:1px solid var(--b);padding-top:16px;font-size:13px;color:var(--m)}</style></head><body><main>
+{% for s in sections %}<section data-type="{{ s.type }}">{% if loop.first %}<h1>{{ s.heading }}</h1>{% else %}<h2>{{ s.heading }}</h2>{% endif %}
+{% for b in s.body_blocks %}<p>{{ b }}</p>{% endfor %}</section>{% endfor %}
+<section id="book"><h2>{{ form_heading }}</h2>
+<form id="lead" method="post" action="{{ api_base }}/v1/leads">
+<label>Name<input name="name" required autocomplete="name"></label><label>Email<input name="email" type="email" required autocomplete="email"></label>
+<label>Phone (optional)<input name="phone" type="tel" autocomplete="tel"></label>
+<div class="hp"><input name="hp" tabindex="-1" autocomplete="off"></div>
+<label style="display:flex;gap:8px;align-items:flex-start"><input type="checkbox" name="consent" value="1" required style="width:auto;margin-top:6px"><span>{{ consent.text }}</span></label>
+<input type="hidden" name="campaign_id" value="{{ campaign_id }}"><input type="hidden" name="page_version" value="{{ version }}">
+<input type="hidden" name="consent_text_id" value="{{ consent.text_id }}"><input type="hidden" name="consent_version" value="{{ consent.version }}">
+<input type="hidden" name="gclid"><input type="hidden" name="fbclid"><input type="hidden" name="utm_source"><input type="hidden" name="utm_campaign">
+<button class="btn" type="submit">{{ cta }}</button></form></section>
+<footer>{% for d in disclosures %}<p>{{ d.text }}</p>{% endfor %}
+<p>{% for l in links %}<a href="{{ l.url }}">{{ l.label }}</a>{% if not loop.last %} · {% endif %}{% endfor %}</p></footer></main>
+<script>(function(){var q=new URLSearchParams(location.search),f=document.getElementById('lead');['gclid','fbclid','utm_source','utm_campaign'].forEach(function(k){var i=f.elements[k];if(i&&q.get(k))i.value=q.get(k)});
+f.addEventListener('submit',function(e){e.preventDefault();var d={};new FormData(f).forEach(function(v,k){d[k]=v});d.consent=!!d.consent;
+fetch(f.action,{method:'POST',headers:{'Content-Type':'application/json','Idempotency-Key':(crypto.randomUUID?crypto.randomUUID():String(Date.now()))},body:JSON.stringify(d)})
+.then(function(r){return r.json()}).then(function(j){f.innerHTML='<p>'+(j.ok?'Thank you. We will be in touch shortly.':'Please check your details and try again.')+'</p>'}).catch(function(){f.insertAdjacentHTML('beforeend','<p>Something went wrong. Please try again.</p>')})})})();</script>
+</body></html>
